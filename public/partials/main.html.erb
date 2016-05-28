@@ -1,0 +1,55 @@
+<div>
+	<div class="row">
+		<h5 class="grey-text text-darken-2">Ejecuciones 2007-2015</h5>
+	</div>
+	<div class="row">
+		<div class="col l5 m5 s12">
+			<div id="national-chart">
+			</div>
+		</div>
+		<div class="col l7 m7 s12">
+			<div id="states-chart">
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class"col l12 b-wide-table">
+			<table class="highlight b-wide-table grey-text text-darken-2">
+				<thead>
+					<tr>
+						<th data-field="estado">Estado<span style="color:transparent">000000000</span></th>
+						<% (2007..2015).each do |x|%>
+							<th data-field="<%=x%>" class="right-align"><%=x%></th>
+						<% end %>
+					</tr>
+				</thead>
+				<tbody>
+					<% @states.each do |state| %>
+						<tr>
+							<td><a id="link-<%=state.clave_estado%>" href=""><%=state.estado%></a></td>
+							<td class="right-align"><%=state.homici2007%></td>
+							<td class="right-align"><%=state.homici2008%></td>
+							<td class="right-align"><%=state.homici2009%></td>
+							<td class="right-align"><%=state.homici2010%></td>
+							<td class="right-align"><%=state.homici2011%></td>
+							<td class="right-align"><%=state.homici2012%></td>
+							<td class="right-align"><%=state.homici2013%></td>
+							<td class="right-align"><%=state.homici2014%></td>
+							<td class="right-align"><%=state.homici2015%></span>							
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+<!-- 		<div class="b-wide-table b-long-table grey-text text-darken-2">
+			<table>
+				<tbody>
+					<div class="collection">
+					
+						</a>
+						</div>
+				</tbody>
+			</table>
+		</div> -->
+	</div>
+</div>

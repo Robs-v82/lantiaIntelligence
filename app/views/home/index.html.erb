@@ -1,0 +1,214 @@
+<script type="text/javascript">
+	var createChart = function() {
+		$.ajax({
+			type: "GET",
+			url: "/home/topStates",
+			dataType: "json",
+			success: function(result) {
+				console.log(parseInt(result["chihuahua"]["clave_estado"]))
+				$('#states-chart').highcharts({
+					chart: {
+						backgroundColor: 'transparent',
+					},
+					title: {
+						text: 'Entidades más violentas'
+					},
+					xAxis: {
+						categories: [
+						'2007', 
+						'2008', 
+						'2009', 
+						'2010', 
+						'2011', 
+						'2012', 
+						'2013', 
+						'2014',
+						'2015' 
+						]
+					},
+					series: [{
+						name: result["chihuahua"]["estado"],
+						data: [
+							parseInt(result["chihuahua"]["homici2007"]),
+							parseInt(result["chihuahua"]["homici2008"]),
+							parseInt(result["chihuahua"]["homici2009"]),
+							parseInt(result["chihuahua"]["homici2010"]),
+							parseInt(result["chihuahua"]["homici2011"]),
+							parseInt(result["chihuahua"]["homici2012"]),
+							parseInt(result["chihuahua"]["homici2013"]),
+							parseInt(result["chihuahua"]["homici2014"]),
+							parseInt(result["chihuahua"]["homici2015"]),
+						]
+					},{
+						name: result["guerrero"]["estado"],
+						data: [
+							parseInt(result["guerrero"]["homici2007"]),
+							parseInt(result["guerrero"]["homici2008"]),
+							parseInt(result["guerrero"]["homici2009"]),
+							parseInt(result["guerrero"]["homici2010"]),
+							parseInt(result["guerrero"]["homici2011"]),
+							parseInt(result["guerrero"]["homici2012"]),
+							parseInt(result["guerrero"]["homici2013"]),
+							parseInt(result["guerrero"]["homici2014"]),
+							parseInt(result["guerrero"]["homici2015"]),
+						]
+					},{
+						name: result["michoacan"]["estado"],
+						data: [
+							parseInt(result["michoacan"]["homici2007"]),
+							parseInt(result["michoacan"]["homici2008"]),
+							parseInt(result["michoacan"]["homici2009"]),
+							parseInt(result["michoacan"]["homici2010"]),
+							parseInt(result["michoacan"]["homici2011"]),
+							parseInt(result["michoacan"]["homici2012"]),
+							parseInt(result["michoacan"]["homici2013"]),
+							parseInt(result["michoacan"]["homici2014"]),
+							parseInt(result["michoacan"]["homici2015"]),
+						]
+					},{
+						name: result["sinaloa"]["estado"],
+						data: [
+							parseInt(result["sinaloa"]["homici2007"]),
+							parseInt(result["sinaloa"]["homici2008"]),
+							parseInt(result["sinaloa"]["homici2009"]),
+							parseInt(result["sinaloa"]["homici2010"]),
+							parseInt(result["sinaloa"]["homici2011"]),
+							parseInt(result["sinaloa"]["homici2012"]),
+							parseInt(result["sinaloa"]["homici2013"]),
+							parseInt(result["sinaloa"]["homici2014"]),
+							parseInt(result["sinaloa"]["homici2015"]),
+						]
+					}],
+			        credits: false,
+					tooltip: {
+		    			backgroundColor: "rgba(0,0,0, 0.65)",
+		    			borderRadius: 0,
+		    			borderWidth: 0,
+						shadow: false,
+						style: {
+							color: "#ffffff"
+						},
+		    			formatter: function() {
+		    				return '<span><b>'+ this.x +'</b><br/>'+Highcharts.numberFormat(this.y, 0)+'</span>'
+						}
+		    		},
+			        legend: {
+			            align: 'right',
+			            verticalAlign: 'top',
+			            layout: 'vertical',
+			            x: 0,
+			            y: 100
+			        },
+		    		yAxis: {
+		    			visible: false,
+		    			gridLineWidth: 0,
+		    		},
+		    		colors: ['#ffab00', '#dd2c00', '#ffd600', '#ff6d00'],
+				})
+			} 
+		})	
+	}
+	createChart()
+
+
+	$(function () { 
+		$('#national-chart').highcharts({
+			chart: {
+				type: 'column',
+        		backgroundColor: 'transparent',
+			},
+			title: {
+				text: 'Total nacional'
+			},
+			xAxis: {
+				categories: [
+				'2007', 
+				'2008', 
+				'2009', 
+				'2010', 
+				'2011', 
+				'2012', 
+				'2013', 
+				'2014',
+				'2015' 
+				]
+			},
+			series: [{
+				data: [2826,6837,9614,15266,15768,13675,11269,8004,8122]
+			}],
+			legend: {
+	            enabled: false
+	        },
+	        credits: false,
+			tooltip: {
+    			
+    			backgroundColor: "rgba(0,0,0, 0.65)",
+    			borderRadius: 0,
+    			borderWidth: 0,
+				shadow: false,
+				style: {
+					color: "#ffffff"
+				},
+    			formatter: function() {
+    				return '<span><b>'+ this.x +'</b><br/>'+Highcharts.numberFormat(this.y, 0)+'</span>'
+				}
+    		},
+    		yAxis: {
+    			visible: false,
+    			gridLineWidth: 0,
+    		},
+    		colors: ['#ffab00'],
+		})
+	})
+</script>
+
+<div class="b-container main">
+	<hr>
+	<div>
+		<div class="row title-row">
+			<p class="section-title flow-text grey-text text-darken-2">Ejecuciones 2007-2015</p>
+		</div>
+		<div class="row">
+			<div class="col l5 m5 s12">
+				<div id="national-chart" class="container-height-300">
+				</div>
+			</div>
+			<div class="col l7 m7 s12">
+				<div id="states-chart" class="container-height-300">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class"col l12 b-wide-table">
+				<div class="table-container">
+					<table class="highlight b-wide-table grey-text text-darken-2">
+						<thead>
+							<tr>
+								<th data-field="estado">Estado<span style="color:transparent">000000000</span></th>
+								<% (2007..2015).each do |x|%>
+									<th data-field="<%=x%>" class="right-align"><%=x%></th>
+								<% end %>
+							</tr>
+						</thead>
+						<tbody>
+							<% @states.each do |state| %>
+								<tr>
+									<td><a href="/estado/<%=state.clave_estado%>"><%=state.estado%></a></td>
+									<td class="right-align"><%=state.homici2007%></td>
+									<td class="right-align"><%=state.homici2008%></td>
+									<td class="right-align"><%=state.homici2009%></td>
+									<td class="right-align"><%=state.homici2010%></td>
+									<td class="right-align"><%=state.homici2011%></td>
+									<td class="right-align"><%=state.homici2012%></td>
+									<td class="right-align"><%=state.homici2013%></td>
+									<td class="right-align"><%=state.homici2014%></td>
+									<td class="right-align"><%=state.homici2015%></span>							
+								</tr>
+							<% end %>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

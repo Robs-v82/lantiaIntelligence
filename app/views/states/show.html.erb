@@ -1,0 +1,255 @@
+<script>
+	var state_id = window.location.pathname.slice(8)
+	var getMunicipalities = function() {
+		$.ajax({
+			type: "GET",
+			url: "/estado/"+state_id+"/getMunicipalities",
+			dataType: "json",
+			success: function(result) {
+				console.log(result)
+				availableTutorials = result.municipalities
+				$("#automplete-1").autocomplete({
+				   source: availableTutorials,
+				   messages: false,
+				});
+			}
+		})
+	}
+	getMunicipalities()
+</script>
+<script type="text/javascript">
+	
+	var state_id = window.location.pathname.slice(8)	
+	
+	var createStateChart = function() {
+		console.log(state_id)
+		$.ajax({
+			type: "GET",
+			url: "/estado/"+state_id+"/getTotal",
+			dataType: "json",
+			success: function(result) {
+				console.log(result)
+				$('#state-chart').highcharts({
+					chart: {
+						type: 'column',
+		        		backgroundColor: 'transparent',
+					},
+					title: {
+						text: 'Total estatal'
+					},
+					xAxis: {
+						categories: [
+						'2007', 
+						'2008', 
+						'2009', 
+						'2010', 
+						'2011', 
+						'2012', 
+						'2013', 
+						'2014',
+						'2015' 
+						]
+					},
+					series: [{
+						data: [
+							parseInt(result["homici2007"]),
+							parseInt(result["homici2008"]),
+							parseInt(result["homici2009"]),
+							parseInt(result["homici2010"]),
+							parseInt(result["homici2011"]),
+							parseInt(result["homici2012"]),
+							parseInt(result["homici2013"]),
+							parseInt(result["homici2014"]),
+							parseInt(result["homici2015"]),
+						]
+					}],
+					legend: {
+			            enabled: false
+			        },
+			        credits: false,
+					tooltip: {
+		    			
+		    			backgroundColor: "rgba(0,0,0, 0.65)",
+		    			borderRadius: 0,
+		    			borderWidth: 0,
+						shadow: false,
+						style: {
+							color: "#ffffff"
+						},
+		    			formatter: function() {
+		    				return '<span><b>'+ this.x +'</b><br/>'+Highcharts.numberFormat(this.y, 0)+'</span>'
+						}
+		    		},
+		    		yAxis: {
+		    			visible: false,
+		    			gridLineWidth: 0,
+		    		},
+		    		colors: ['#ffab00'],					
+				})
+			}
+		})
+	}
+	createStateChart()
+
+	var createTop3Chart = function() {
+		console.log(state_id)
+		$.ajax({
+			type: "GET",
+			url: "/estado/"+state_id+"/getTop3",
+			dataType: "json",
+			success: function(result) {
+				console.log(result["data"])
+				$('#top3Chart').highcharts({
+					chart: {
+						backgroundColor: 'transparent',
+					},
+					title: {
+						text: 'Municipios con más ejecuciones'
+					},
+					xAxis: {
+						categories: [
+						'2007', 
+						'2008', 
+						'2009', 
+						'2010', 
+						'2011', 
+						'2012', 
+						'2013', 
+						'2014',
+						'2015' 
+						]
+					},
+					series: [{
+						name: result["data"][0]["munici"],
+						data: [
+							(result["data"][0]["homici2007"]),
+							(result["data"][0]["homici2008"]),
+							(result["data"][0]["homici2009"]),
+							(result["data"][0]["homici2010"]),
+							(result["data"][0]["homici2011"]),
+							(result["data"][0]["homici2012"]),
+							(result["data"][0]["homici2013"]),
+							(result["data"][0]["homici2014"]),
+							(result["data"][0]["homici2015"]),
+						]
+					},{
+						name: result["data"][1]["munici"],
+						data: [
+							(result["data"][1]["homici2007"]),
+							(result["data"][1]["homici2008"]),
+							(result["data"][1]["homici2009"]),
+							(result["data"][1]["homici2010"]),
+							(result["data"][1]["homici2011"]),
+							(result["data"][1]["homici2012"]),
+							(result["data"][1]["homici2013"]),
+							(result["data"][1]["homici2014"]),
+							(result["data"][1]["homici2015"]),
+						]
+					},{
+						name: result["data"][2]["munici"],
+						data: [
+							(result["data"][2]["homici2007"]),
+							(result["data"][2]["homici2008"]),
+							(result["data"][2]["homici2009"]),
+							(result["data"][2]["homici2010"]),
+							(result["data"][2]["homici2011"]),
+							(result["data"][2]["homici2012"]),
+							(result["data"][2]["homici2013"]),
+							(result["data"][2]["homici2014"]),
+							(result["data"][2]["homici2015"]),
+						]
+					}],
+			        credits: false,
+					tooltip: {
+		    			backgroundColor: "rgba(0,0,0, 0.65)",
+		    			borderRadius: 0,
+		    			borderWidth: 0,
+						shadow: false,
+						style: {
+							color: "#ffffff"
+						},
+		    			formatter: function() {
+		    				return '<span><b>'+ this.x +'</b><br/>'+Highcharts.numberFormat(this.y, 0)+'</span>'
+						}
+		    		},
+			        legend: {
+			            align: 'right',
+			            verticalAlign: 'top',
+			            layout: 'vertical',
+			            x: 0,
+			            y: 100
+			        },
+		    		yAxis: {
+		    			visible: false,
+		    			gridLineWidth: 0,
+		    		},
+		    		colors: ['#ffab00', '#dd2c00', '#ffd600', '#ff6d00'],
+				})
+			}
+		})
+	}
+	createTop3Chart()
+
+</script>
+<div class="b-container main">
+<hr>
+<a href="/" class="route-link"><p class="link-text" style="inline-block">Cifras nacionales</p></a>
+	<div>
+		<div class="row title-row">
+			<p class="section-title flow-text grey-text text-darken-2"><%=@state.estado%>: ejecuciones 2007-2015</p>
+		</div>
+		<div class="row">
+			<div class="col l5 m5 s12">
+				<div id="state-chart" class="container-height-300"></div>
+			</div>
+			<div class="col l7 m7 s12">
+				<div id="top3Chart" class="container-height-250"></div>
+				<div id="municiChoiceChart" class=" container-height-250" style="display:none; width: 487px"></div>
+				<div class="ui-widget row container-height-50">
+					<form action="/estado/<%=@state.clave_estado%>/municiChoice" id="municiChoice" method="post">
+						<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+						<div class="col s9 m7 l6">
+							<label for="automplete-1"></label>
+							<input class="box-text-input" placeholder="Selecciona otro municipio" name="municipality[munici]" id="automplete-1">
+						</div>
+						<div class="input-field col s2">
+							<button type="submit" class="btn-floating btn-small waves-effect waves-light transparent z-depth-0"><i class="material-icons blue-text">send</i></button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class"col l12 b-wide-table table-container">
+				<div class="table-container">
+					<table class="highlight b-wide-table grey-text text-darken-2">
+						<thead>
+							<tr>
+								<th data-field="estado">Municipio</th>
+								<% (2007..2015).each do |x|%>
+									<th data-field="<%=x%>" class="right-align"><%=x%></th>
+								<% end %>
+							</tr>
+						</thead>
+						<tbody>
+							<%@municipalities.each do |municipality|%>
+								<tr>
+									<td><%=municipality.munici%></a></td>
+									<td class="right-align"><%=municipality.homici2007%></td>
+									<td class="right-align"><%=municipality.homici2008%></td>
+									<td class="right-align"><%=municipality.homici2009%></td>
+									<td class="right-align"><%=municipality.homici2010%></td>
+									<td class="right-align"><%=municipality.homici2011%></td>
+									<td class="right-align"><%=municipality.homici2012%></td>
+									<td class="right-align"><%=municipality.homici2013%></td>
+									<td class="right-align"><%=municipality.homici2014%></td>
+									<td class="right-align"><%=municipality.homici2015%></span>							
+								</tr>
+							<% end %>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

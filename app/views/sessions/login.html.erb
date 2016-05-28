@@ -1,0 +1,14 @@
+<div class="b-container main">
+	<hr>
+	<div class="row">
+		<form action="/sessions/send_login" method="post">	
+			<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+			<div class="col s10 m5 l3" style="padding:0">
+				<input class="box-text-input" name="user[password]" id="password" type="password" placeholder="Contraseña">
+			</div>
+			<div class="col s2">
+				<button type="submit" class="btn-floating waves-effect waves-light z-depth-0 transparent"><i class="material-icons blue-text">send</i></button>
+			</div>
+		</form>
+	</div>
+</div>
