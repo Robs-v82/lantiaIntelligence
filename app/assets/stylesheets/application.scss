@@ -20,7 +20,7 @@ $primary-color: color("blue", "lighten-2") !default;
 }
 
 .side-nav {
-	background-color: rgba(0,0,0, 0.65)
+	background-color: rgba(0,0,0,0.75);
 }
 
 .b-tab {
@@ -34,6 +34,12 @@ $primary-color: color("blue", "lighten-2") !default;
 	margin: 10px 10px;
 	border: 2px solid white;
 	vertical-align: bottom;
+}
+
+.dark-screen {
+	padding-top: 20px;
+	background-color: rgba(0,0,0,0.35);
+	margin: 0;
 }
 
 
@@ -176,6 +182,15 @@ input:not([type]), input[type=password] {
     background-color: white !important;
 
 }
+input[type=text] {
+    width: 100%;
+    padding: 10px;
+    height: 2.2em;
+    box-sizing: border-box;
+    border: 1px solid #bdbdbd !important;
+    background-color: white !important;
+
+}
 
 .input[type=text]:focus {
   border-bottom: 0 1px 0 0 orange !important;
@@ -192,5 +207,10 @@ input:not([type]), input[type=password] {
 
 .ui-menu-item {
 	color: white !important;
+}
+
+input[type=text]:focus {
+  background-color: blue;
+  border-bottom: red;
 }
 

@@ -3,20 +3,19 @@ class StatesController < ApplicationController
   before_action :require_login
   
   def show
-	@state = State.find(params[:id]) 
-	@municipalities = Municipality.where("clave_estado='#{params[:id]}'")
+  	@state = State.find(params[:id]) 
+  	@municipalities = Municipality.where("clave_estado='#{params[:id]}'")
   end
 
 	def getTop3
-		@municipalities = Municipality.where("clave_estado='#{params[:id]}'")
-		@top3 = @municipalities.order(homici2015: :desc).limit(3)
-		render :json => {
-			data: @top3
-		}
+  		@municipalities = Municipality.where("clave_estado='#{params[:id]}'")
+  		@top3 = @municipalities.order(homici2015: :desc).limit(3)
+  		render :json => {
+  			data: @top3
+  		}
 	end
 
 	def municiChoice
-		puts 'XXxx'*50, municy_params
 		@municipality = Municipality.find_by_munici(municy_params[:munici])
 		render :json => {
 			data: @municipality
@@ -46,11 +45,10 @@ class StatesController < ApplicationController
 	  		homici2014: homici2014, 
 	  		homici2015: homici2015, 
 	  	}
-
   end
 
   def getStates
-  	states = State.all.pluck(:state)
+  	states = State.all.pluck(:estado)
   	render :json => {states: states}
   end
 
@@ -59,12 +57,24 @@ class StatesController < ApplicationController
   	render :json => {municipalities: stateMunicipalities}
   end
 
+  def targetState
+    if State.find_by_estado(targetState_params[:estado])
+      targetState = State.find_by_estado(targetState_params[:estado])
+      redirect_to "/estado/#{targetState[:clave_estado]}"
+    else
+      redirect_to "/"
+    end
+  end
+
   private
 
   def municy_params
   	params.require(:municipality).permit(:munici)
   end
 
+  def targetState_params
+  	params.require(:state).permit(:estado)
+  end
 
 end
 

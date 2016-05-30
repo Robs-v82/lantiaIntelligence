@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
   root 'home#index'
-  get 'states/show'
   get 'home/data' => 'home#data'
   get 'home/topStates' => 'home#topStates'
   get 'home/profile' => 'home#profile'
   get 'auth/:provider/callback', to: 'sessions#create'
   delete 'sign_out', to: 'sessions#destroy', as: 'sign_out'
+  get 'estado/getStates' => 'states#getStates'
   get 'estado/:id/getMunicipalities' => 'states#getMunicipalities'
+  post 'estado/targetState' => 'states#targetState'
   post 'estado/:id/municiChoice' => 'states#municiChoice'
   get 'estado/:id/getTop3' => 'states#getTop3'
   get 'estado/:id/getTotal' => 'states#getTotal'
@@ -14,7 +15,6 @@ Rails.application.routes.draw do
   get 'sessions/login' => 'sessions#login'
   get 'sessions/logout' => 'sessions#logout'
   post 'sessions/send_login' => 'sessions#send_login'
-  get 'estado/getStates' => 'states#getStates'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

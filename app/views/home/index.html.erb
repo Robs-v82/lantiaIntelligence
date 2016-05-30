@@ -1,3 +1,21 @@
+<script>
+	var getStates = function() {
+		$.ajax({
+			type: "GET",
+			url: "/estado/getStates",
+			dataType: "json",
+			success: function(result) {
+				console.log(result)
+				data = result.states
+				$("#automplete-2").autocomplete({
+				   source: data,
+				   messages: false,
+				});
+			}
+		})
+	}
+	getStates()
+</script>
 <script type="text/javascript">
 	var createChart = function() {
 		$.ajax({
@@ -164,6 +182,16 @@
 
 <div class="b-container main">
 	<hr>
+	<div class="row container-height-50">
+			<div class="ui-widget">
+				<form action="/estado/targetState" method="post">
+					<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+					<input class="box-text-input col s9 m4 l3" placeholder="Selecciona entidad" name="state[estado]" id="automplete-2" type="text">
+					<button type="submit" class="btn-floating btn-small waves-effect waves-light transparent z-depth-0 col s3 m2 l1"><i class="material-icons blue-text">send</i></button>
+				</form>
+			</div>
+		</p>
+	</div>
 	<div>
 		<div class="row title-row">
 			<p class="section-title flow-text grey-text text-darken-2">Ejecuciones 2007-2015</p>

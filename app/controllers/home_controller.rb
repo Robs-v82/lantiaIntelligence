@@ -7,7 +7,6 @@ class HomeController < ApplicationController
 	def index
 		@states = State.all
 		states = @states
-
 	end
 
 	def data
