@@ -116,7 +116,6 @@ footer {
 }
 
 .active-button {
-
 	background-color: #f44336 !important; 	
 }
 
@@ -180,8 +179,8 @@ input:not([type]), input[type=password] {
     box-sizing: border-box;
     border: 1px solid #bdbdbd !important;
     background-color: white !important;
-
 }
+
 input[type=text] {
     width: 100%;
     padding: 10px;
@@ -189,7 +188,6 @@ input[type=text] {
     box-sizing: border-box;
     border: 1px solid #bdbdbd !important;
     background-color: white !important;
-
 }
 
 .input[type=text]:focus {
@@ -212,5 +210,10 @@ input[type=text] {
 input[type=text]:focus {
   background-color: blue;
   border-bottom: red;
+}
+
+.active-year-button {
+	color: #424242 !important;
+	font-weight: 600;
 }
 

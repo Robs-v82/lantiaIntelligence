@@ -16,7 +16,7 @@
 	}
 	getStates()
 </script>
-<script type="text/javascript">
+<script>
 	var createChart = function() {
 		$.ajax({
 			type: "GET",
@@ -178,6 +178,11 @@
     		colors: ['#ffab00'],
 		})
 	})
+
+
+
+
+
 </script>
 
 <div class="b-container main">
@@ -194,7 +199,21 @@
 	</div>
 	<div>
 		<div class="row title-row">
-			<p class="section-title flow-text grey-text text-darken-2">Ejecuciones 2007-2015</p>
+			<p class="section-title flow-text grey-text text-darken-2">Ejecuciones</p>
+		</div>
+		<div class="row">
+			<div class="col s2">
+				<a class="waves-effect waves-light btn-flat blue-text year-button active-year-button" id="national-map-2015">2015</a>
+				<a class="waves-effect waves-light btn-flat blue-text year-button" id="national-map-2014">2014</a>
+				<a class="waves-effect waves-light btn-flat blue-text year-button" id="national-map-2013">2013</a>
+				<a class="waves-effect waves-light btn-flat blue-text year-button" id="national-map-2012">2012</a>
+				<a class="waves-effect waves-light btn-flat blue-text year-button" id="national-map-2011">2011</a>
+				<a class="waves-effect waves-light btn-flat blue-text year-button" id="national-map-2010">2010</a>
+				<a class="waves-effect waves-light btn-flat blue-text year-button" id="national-map-2009">2009</a>
+				<a class="waves-effect waves-light btn-flat blue-text year-button" id="national-map-2008">2008</a>
+				<a class="waves-effect waves-light btn-flat blue-text year-button" id="national-map-2007">2007</a>
+			</div>
+			<div class="col s10" id="map-container-2015"></div>
 		</div>
 		<div class="row">
 			<div class="col l5 m5 s12">

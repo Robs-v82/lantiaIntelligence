@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   get 'home/data' => 'home#data'
   get 'home/topStates' => 'home#topStates'
   get 'home/profile' => 'home#profile'
+  get 'home/nationalMapData' => 'home#nationalMapData'
+  get 'home/:year/nationalMapData' => 'home#nationalMapData'
   get 'auth/:provider/callback', to: 'sessions#create'
   delete 'sign_out', to: 'sessions#destroy', as: 'sign_out'
   get 'estado/getStates' => 'states#getStates'

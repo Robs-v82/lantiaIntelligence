@@ -34,7 +34,7 @@ gem 'materialize-sass'
 
 gem 'hirb'
 
-gem "highcharts-rails"
+# gem "highcharts-rails"
 
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
