@@ -5,7 +5,6 @@
 			url: "/estado/getStates",
 			dataType: "json",
 			success: function(result) {
-				console.log(result)
 				data = result.states
 				$("#automplete-2").autocomplete({
 				   source: data,
@@ -23,7 +22,6 @@
 			url: "/home/topStates",
 			dataType: "json",
 			success: function(result) {
-				console.log(parseInt(result["chihuahua"]["clave_estado"]))
 				$('#states-chart').highcharts({
 					chart: {
 						backgroundColor: 'transparent',

@@ -14,15 +14,12 @@
 		<script src="http://code.highcharts.com/maps/modules/map.js"></script>
 		<script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
 		<script src="https://code.highcharts.com/mapdata/countries/mx/mx-all.js"></script>
-		<script src="/assets/distrito_federal.geojson"></script>
 		<meta name="google-signin-client_id" content="172503291441-65eaj51nodpn0kevuut7pm4rh7tnh0kg.apps.googleusercontent.com">
 		<script>
 			var ready;
 			ready = function() {
 				$(document).ready(function() {
 					//Materialize commands:
-
-
 					$('ul.tabs').tabs();
 					$(".button-collapse").sideNav()
 					$('.login-modal-trigger').leanModal()
@@ -65,19 +62,45 @@
 						nationalMapData(2007)
 					})
 
+					$('#state-map-2015').click(function() {
+						stateMapData(2015)
+					})
+					$('#state-map-2014').click(function() {
+						stateMapData(2014)
+					})
+					$('#state-map-2013').click(function() {
+						stateMapData(2013)
+					})
+					$('#state-map-2012').click(function() {
+						stateMapData(2012)
+					})
+					$('#state-map-2011').click(function() {
+						stateMapData(2011)
+					})
+					$('#state-map-2010').click(function() {
+						stateMapData(2010)
+					})
+					$('#state-map-2009').click(function() {
+						stateMapData(2009)
+					})
+					$('#state-map-2008').click(function() {
+						stateMapData(2008)
+					})
+					$('#state-map-2007').click(function() {
+						stateMapData(2007)
+					})
+
 					
 
 					var municiChoiceForm = $('#municiChoice')
 					
-
+					
 					var nationalMapData = function(year) {
-						console.log(year)
 						$.ajax({
 							type: "GET",
 							url: "/home/"+year+"/nationalMapData",
 							dataType: "json",
 							success: function(result) {
-							    console.log(result.data)
 							    $('#map-container-2015').highcharts('Map', {
 
 							        chart: {
@@ -136,14 +159,12 @@
 
 					$('#municiChoice').submit(function(e) {
 						e.preventDefault()
-						console.log("Hola")
 						$.ajax({
 							type: "POST",
 							url: "/estado/"+state_id+"/municiChoice",
 							data: municiChoiceForm.serialize(),
 							dataType: "json",
 							success: function(result) {
-								console.log(result)
 								$('#municiChoiceChart').highcharts({
 								chart: {
 									backgroundColor: 'transparent',

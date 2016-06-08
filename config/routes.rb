@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   post 'estado/:id/municiChoice' => 'states#municiChoice'
   get 'estado/:id/getTop3' => 'states#getTop3'
   get 'estado/:id/getTotal' => 'states#getTotal'
+  get 'estado/:id/:year/stateMapData' => 'states#stateMapData'
   get 'estado/:id' => "states#show"
   get 'sessions/login' => 'sessions#login'
   get 'sessions/logout' => 'sessions#logout'

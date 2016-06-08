@@ -66,6 +66,81 @@ class StatesController < ApplicationController
     end
   end
 
+  def stateMapData
+    data = [
+      {
+        "clave_estado": params[:id]
+        },
+    ]
+      municipios = Municipality.where("clave_estado='#{params[:id]}'")
+      if params[:year] == "2015"
+        municipios.each do |municipio|
+          data << {
+               "clave_munici": municipio.clave_munici,
+               "value": municipio.homici2015.to_i
+          }
+        end
+    elsif params[:year] == "2014"
+        municipios.each do |municipio|
+          data << {
+               "clave_munici": municipio.clave_munici,
+               "value": municipio.homici2014.to_i
+          }
+        end
+    elsif params[:year] == "2013"
+        municipios.each do |municipio|
+          data << {
+               "clave_munici": municipio.clave_munici,
+               "value": municipio.homici2013.to_i
+          }
+        end
+    elsif params[:year] == "2012"
+        municipios.each do |municipio|
+          data << {
+               "clave_munici": municipio.clave_munici,
+               "value": municipio.homici2012.to_i
+          }
+        end
+    elsif params[:year] == "2011"
+        municipios.each do |municipio|
+          data << {
+               "clave_munici": municipio.clave_munici,
+               "value": municipio.homici2011.to_i
+          }
+        end
+    elsif params[:year] == "2010"
+        municipios.each do |municipio|
+          data << {
+               "clave_munici": municipio.clave_munici,
+               "value": municipio.homici2010.to_i
+          }
+        end
+    elsif params[:year] == "2009"
+        municipios.each do |municipio|
+          data << {
+               "clave_munici": municipio.clave_munici,
+               "value": municipio.homici2009.to_i
+          }
+        end
+    elsif params[:year] == "2008"
+        municipios.each do |municipio|
+          data << {
+               "clave_munici": municipio.clave_munici,
+               "value": municipio.homici2008.to_i
+          }
+        end
+    elsif params[:year] == "2007"
+        municipios.each do |municipio|
+          data << {
+               "clave_munici": municipio.clave_munici,
+               "value": municipio.homici2007.to_i
+          }
+        end
+    end
+      render :json => {data: data}
+  end
+
+
   private
 
   def municy_params

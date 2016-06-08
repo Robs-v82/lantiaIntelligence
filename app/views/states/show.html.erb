@@ -6,7 +6,6 @@
 			url: "/estado/"+state_id+"/getMunicipalities",
 			dataType: "json",
 			success: function(result) {
-				console.log(result)
 				availableTutorials = result.municipalities
 				$("#automplete-1").autocomplete({
 				   source: availableTutorials,
@@ -21,14 +20,172 @@
 	
 	var state_id = window.location.pathname.slice(8)	
 	
+	var stateMapData = function(year) {
+		$.ajax({
+			type: "GET",
+			url: "/estado/"+state_id+"/"+year+"/stateMapData",
+			dataType: "json",
+			success: function(result) {
+			    console.log(result)
+				if (result.data[0].clave_estado=="01") {
+			    	var target_map = aguascalientes
+			    }
+			    else if (result.data[0].clave_estado=="02") {
+			    	var target_map = baja_california
+			    }
+			    else if (result.data[0].clave_estado=="03") {
+			    	var target_map = baja_california_sur
+			    }
+			    else if (result.data[0].clave_estado=="04") {
+			    	var target_map = campeche
+			    }
+			    else if (result.data[0].clave_estado=="05") {
+			    	var target_map = coahuila
+			    }
+			    else if (result.data[0].clave_estado=="06") {
+			    	var target_map = colima
+			    }
+			    else if (result.data[0].clave_estado=="07") {
+			    	var target_map = chiapas
+			    }
+			    else if (result.data[0].clave_estado=="08") {
+			    	var target_map = chihuahua
+			    }
+			    else if (result.data[0].clave_estado=="09") {
+			    	var target_map = distrito_federal
+			    }
+			    else if (result.data[0].clave_estado=="10") {
+			    	var target_map = durango
+			    }
+			    else if (result.data[0].clave_estado=="11") {
+			    	var target_map = guanajuato
+			    }
+			    else if (result.data[0].clave_estado=="12") {
+			    	var target_map = guerrero
+			    }
+			    else if (result.data[0].clave_estado=="13") {
+			    	var target_map = hidalgo
+			    }
+			    else if (result.data[0].clave_estado=="14") {
+			    	var target_map = jalisco
+			    }
+			    else if (result.data[0].clave_estado=="15") {
+			    	var target_map = mexico
+			    }
+			    else if (result.data[0].clave_estado=="16") {
+			    	var target_map = michoacan
+			    }
+			    else if (result.data[0].clave_estado=="17") {
+			    	var target_map = morelos
+			    }
+			    else if (result.data[0].clave_estado=="18") {
+			    	var target_map = nayarit
+			    }
+			    else if (result.data[0].clave_estado=="19") {
+			    	var target_map = nuevo_leon
+			    }
+			    else if (result.data[0].clave_estado=="20") {
+			    	var target_map = oaxaca
+			    }
+			    else if (result.data[0].clave_estado=="21") {
+			    	var target_map = puebla
+			    }
+			    else if (result.data[0].clave_estado=="22") {
+			    	var target_map = queretaro
+			    }
+			    else if (result.data[0].clave_estado=="23") {
+			    	var target_map = quintana_roo
+			    }
+			    else if (result.data[0].clave_estado=="24") {
+			    	var target_map = san_luis_potosi
+			    }
+			    else if (result.data[0].clave_estado=="25") {
+			    	var target_map = sinaloa
+			    }
+			    else if (result.data[0].clave_estado=="26") {
+			    	var target_map = sonora
+			    }
+			    else if (result.data[0].clave_estado=="27") {
+			    	var target_map = tabasco
+			    }
+			    else if (result.data[0].clave_estado=="28") {
+			    	var target_map = tamaulipas
+			    }
+			    else if (result.data[0].clave_estado=="29") {
+			    	var target_map = tlaxcala
+			    }
+			    else if (result.data[0].clave_estado=="30") {
+			    	var target_map = veracruz
+			    }
+			    else if (result.data[0].clave_estado=="31") {
+			    	var target_map = yucatan
+			    }
+			    else if (result.data[0].clave_estado=="32") {
+			    	var target_map = zacatecas
+			    }
+			    console.log(target_map)
+			    console.log(result.data.clave_estado)
+			    $('#state-map-container').highcharts('Map', {
+
+			        chart: {
+				        backgroundColor: "transparent" 	
+			        },
+			        title : false,
+			        mapNavigation: {
+			            enabled: true,
+			            buttonOptions: {
+			                verticalAlign: 'bottom'
+			            }
+			        },
+
+			        colorAxis: {
+			            min: 0,
+			            max: 50,
+			            minColor: '#ffd600',
+			            maxColor: '#dd2c00',  
+			        },
+
+			        series : [{
+			            data: result.data,
+			            mapData: target_map,
+			            joinBy: 'clave_munici',
+			            name: year,
+			            states: {
+			                hover: {
+			                    color: '#BADA55'
+			                }
+			            },
+			            dataLabels: {
+			                enabled: false,
+			            }
+			        }],
+			        credits: {
+			        	enabled: false, 
+			        },
+					tooltip: {
+		    			backgroundColor: "rgba(0,0,0, 0.65)",
+		    			borderRadius: 0,
+		    			borderWidth: 0,
+						shadow: false,
+						style: {
+							color: "#ffffff"
+						}
+					},
+					legend: {
+						enabled: false,
+					},
+			    })
+			}
+		})
+	}
+    stateMapData(2015)
+
 	var createStateChart = function() {
-		console.log(state_id)
 		$.ajax({
 			type: "GET",
 			url: "/estado/"+state_id+"/getTotal",
 			dataType: "json",
 			success: function(result) {
-				console.log(result)
 				$('#state-chart').highcharts({
 					chart: {
 						type: 'column',
@@ -92,13 +249,11 @@
 	createStateChart()
 
 	var createTop3Chart = function() {
-		console.log(state_id)
 		$.ajax({
 			type: "GET",
 			url: "/estado/"+state_id+"/getTop3",
 			dataType: "json",
 			success: function(result) {
-				console.log(result["data"])
 				$('#top3Chart').highcharts({
 					chart: {
 						backgroundColor: 'transparent',
@@ -197,6 +352,20 @@
 	<div>
 		<div class="row title-row">
 			<p class="section-title flow-text grey-text text-darken-2"><%=@state.estado%>: ejecuciones 2007-2015</p>
+		</div>
+		<div class="row">
+			<div class="col s2">
+				<a class="waves-effect waves-light btn-flat blue-text year-button active-year-button" id="state-map-2015">2015</a>
+				<a class="waves-effect waves-light btn-flat blue-text year-button" id="state-map-2014">2014</a>
+				<a class="waves-effect waves-light btn-flat blue-text year-button" id="state-map-2013">2013</a>
+				<a class="waves-effect waves-light btn-flat blue-text year-button" id="state-map-2012">2012</a>
+				<a class="waves-effect waves-light btn-flat blue-text year-button" id="state-map-2011">2011</a>
+				<a class="waves-effect waves-light btn-flat blue-text year-button" id="state-map-2010">2010</a>
+				<a class="waves-effect waves-light btn-flat blue-text year-button" id="state-map-2009">2009</a>
+				<a class="waves-effect waves-light btn-flat blue-text year-button" id="state-map-2008">2008</a>
+				<a class="waves-effect waves-light btn-flat blue-text year-button" id="state-map-2007">2007</a>
+			</div>
+			<div class="col s10" id="state-map-container"></div>
 		</div>
 		<div class="row">
 			<div class="col l5 m5 s12">
