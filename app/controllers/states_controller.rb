@@ -3,7 +3,7 @@ class StatesController < ApplicationController
   before_action :require_login
   
   def show
-  	@state = State.find(params[:id]) 
+  	@state = State.find_by_clave_estado(params[:id]) 
   	@municipalities = Municipality.where("clave_estado='#{params[:id]}'")
   end
 
