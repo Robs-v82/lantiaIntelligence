@@ -11,10 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160526201438) do
+ActiveRecord::Schema.define(version: 20160615174916) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "events", force: true do |t|
+    t.string   "source"
+    t.date     "date"
+    t.string   "clave_munici"
+    t.string   "neighborhood"
+    t.integer  "deaths"
+    t.string   "name"
+    t.string   "activity1"
+    t.string   "activity2"
+    t.string   "gender"
+    t.string   "age"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "killing_location"
+    t.string   "corpse_location"
+  end
 
   create_table "municipalities", force: true do |t|
     t.string   "clave_estado"

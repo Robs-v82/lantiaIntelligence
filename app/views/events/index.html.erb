@@ -1,0 +1,33 @@
+<script>
+	var getStates = function() {
+		$.ajax({
+			type: "GET",
+			url: "/estado/getStates",
+			dataType: "json",
+			success: function(result) {
+				data = result.states
+				$("#automplete-2").autocomplete({
+				   source: data,
+				   messages: false,
+				});
+			}
+		})
+	}
+	getStates()
+</script>
+<div class="b-container main">
+	<hr>
+	<a href="/" class="route-link"><p class="link-text" style="inline-block">Cifras nacionales</p></a>
+	<br>
+	<div class="row">
+		<div class="col s12 m12 l5">
+			<h5>Búsqueda avanzada</h5>
+			<div class="ui-widget">
+				<form>
+					<input class="col s6 m4 l3 box-text-input" placeholder="Selecciona entidad" name="state[estado]" id="automplete-2" type="text">
+					<input disabled class="col s6 m4 l3 box-text-input" placeholder="Selecciona municipio" name="state[estado]" id="automplete-2" type="text">
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

@@ -186,12 +186,18 @@
 <div class="b-container main">
 	<hr>
 	<div class="row container-height-50">
-			<div class="ui-widget">
-				<form action="/estado/targetState" method="post">
-					<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
-					<input class="box-text-input col s9 m4 l3" placeholder="Selecciona entidad" name="state[estado]" id="automplete-2" type="text">
-					<button type="submit" class="btn-floating btn-small waves-effect waves-light transparent z-depth-0 col s3 m2 l1"><i class="material-icons blue-text">send</i></button>
-				</form>
+			<div class="col s12 m6">
+				<div class="ui-widget">
+					<form action="/estado/targetState" method="post">
+						<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+						<input class="col s8 box-text-input" placeholder="Selecciona entidad" name="state[estado]" id="automplete-2" type="text">
+						<button type="submit" class="col s2 btn-floating btn-small waves-effect waves-light transparent z-depth-0 "><i class="material-icons blue-text">send</i></button>
+					</form>
+				</div>
+			</div>
+				<div class="col s12 m6">
+					<a href="/events"><p class="link-text" style="display:inline-block">Búsqueda avanzada</p></a>
+				</div>
 			</div>
 		</p>
 	</div>

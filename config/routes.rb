@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'events/index'
+
   root 'home#index'
   get 'home/data' => 'home#data'
   get 'home/topStates' => 'home#topStates'
@@ -18,6 +20,7 @@ Rails.application.routes.draw do
   get 'sessions/login' => 'sessions#login'
   get 'sessions/logout' => 'sessions#logout'
   post 'sessions/send_login' => 'sessions#send_login'
+  get 'events' => 'events#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
